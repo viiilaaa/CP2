@@ -1,10 +1,30 @@
 
-output "public_ip" {
-  description = "IP pública de la VM"
-  value       = azurerm_public_ip.public_ip.ip_address
-}
+resource "azurerm_linux_virtual_machine" "vm" {
+    name                = "${var.PracticeName}-vm"
+    resource_group_name = var.resource_group_name
+    location            = var.resource_group_location
+    size                = "Standard_B2s_v2"
+    zone                = "2"
+    admin_username      = "azureuser"
+    network_interface_ids = [
+        azurerm_network_interface.nic.id,
+    ]
+    admin_ssh_key {
+        username   = "azureuser"
+        public_key = file("~/.ssh/mi_clave_azure.pub")
+    }
 
-output "vm_id" {
-  description = "ID de la máquina virtual"
-  value       = azurerm_linux_virtual_machine.vm.id
+    os_disk {
+        name                 = "${var.PracticeName}-osdisk"
+        caching              = "ReadWrite"
+        storage_account_type = "Standard_LRS"
+    }
+
+    source_image_reference {
+        publisher = "Canonical"
+        offer     = "ubuntu-24_04-lts"
+        sku       = "server"
+        version   = "latest"
+    }
+  
 }
