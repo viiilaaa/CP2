@@ -4,14 +4,15 @@ resource "azurerm_virtual_network" "red-virtual" {
   location            = var.resource_group_location
   resource_group_name = var.resource_group_name
   
+  tags = var.nametags
 }
 
 resource "azurerm_subnet" "subnet" {
   name                 = "${var.PracticeName}-subnet"
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.red-virtual.name
-  address_prefixes     = ["10.0.1.0/24"]
-  
+  address_prefixes     = ["10.0.1.0/24"]  
+
 }
 
 resource "azurerm_network_interface" "nic" {
@@ -25,6 +26,8 @@ resource "azurerm_network_interface" "nic" {
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.public_ip.id
   }
+
+  tags = var.nametags
 } 
 
 resource "azurerm_public_ip" "public_ip" {
@@ -32,5 +35,7 @@ resource "azurerm_public_ip" "public_ip" {
   location            = var.resource_group_location
   resource_group_name = var.resource_group_name
   allocation_method   = "Static"
+
+  tags = var.nametags
   
 }

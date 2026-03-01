@@ -1,9 +1,3 @@
-variable "ubicacion_recursos" {
-  description = "Región de Azure donde se crearán los recursos"
-  type        = string
-  default     = "West Europe"
-}
-
 variable "PracticeName" {
   description = "Nombre de la práctica"
   type        = string
@@ -18,4 +12,9 @@ variable "resource_group_name" {
 variable "resource_group_location" {
   description = "Ubicación del resource group"
   type        = string
+}
+
+variable "nametags" {
+  description = "Etiquetas para los recursos"
+  type        = map(string)
 }

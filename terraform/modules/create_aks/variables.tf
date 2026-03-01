@@ -18,3 +18,8 @@ variable "acr_id" {
   type        = string
   description = "ID del Azure Container Registry para asignar permisos"
 }
+
+variable "nametags" {
+  description = "Etiquetas para los recursos"
+  type        = map(string)
+}

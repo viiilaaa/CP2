@@ -13,3 +13,8 @@ variable "resource_group_location" {
   description = "Ubicación del resource group"
   type        = string
 }
+
+variable "nametags" {
+  description = "Etiquetas para los recursos"
+  type        = map(string)
+}
