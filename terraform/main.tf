@@ -22,5 +22,8 @@ module "aks-create" {
   PracticeName = "CP2"
   resource_group_name = azurerm_resource_group.rg.name
   resource_group_location = azurerm_resource_group.rg.location
+  acr_id = module.acr-create.acr_id
+
+  depends_on = [ module.acr-create ]
   
 }
