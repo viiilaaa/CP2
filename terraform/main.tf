@@ -16,3 +16,11 @@ module "acr-create" {
   resource_group_name = azurerm_resource_group.rg.name
   resource_group_location = azurerm_resource_group.rg.location
 }
+
+module "aks-create" {
+  source = "./modules/create_aks"
+  PracticeName = "CP2"
+  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_location = azurerm_resource_group.rg.location
+  
+}
