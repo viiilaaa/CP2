@@ -1,0 +1,15 @@
+- name: Actualizar la caché de repositorios (apt-get update)
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Instalar podman
+  ansible.builtin.package:
+    name: podman
+    state: present
+
+- name: Instalar dependencias nginx
+  ansible.builtin.apt:
+    pkg:
+      - python3-passlib
+      - apache2-utils
+    state: present

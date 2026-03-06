@@ -1,0 +1,9 @@
+- name: Correr contenedor de nginx
+  hosts: vm
+  gather_facts: false
+  become: true
+
+  tasks:
+    - name: Incluir el rol de configuración
+      include_role:
+        name: RunContainer

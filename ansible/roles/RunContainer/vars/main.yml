@@ -1,0 +1,10 @@
+#SPDX-License-Identifier: MIT-0
+---
+# vars file for RunContainer
+nginx_user: "xxxxx"
+nginx_pass: "xxxxx"
+path_data: "/home/azureuser/nginx-data"
+
+acr_admin_password: xxxxxx
+acr_admin_username: xxxxx
+acr_login_server: cp2acrregistry.azurecr.io
