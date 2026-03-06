@@ -1,0 +1,23 @@
+- name: Descargar imagen de nginx
+  containers.podman.podman_image:
+    name: "docker.io/library/nginx:latest"
+    tag: latest
+    pull: true
+
+- name: Iniciar sesión en ACR
+  containers.podman.podman_login:
+    registry: "{{ acr_login_server }}"
+    username: "{{ acr_admin_username }}"
+    password: "{{ acr_admin_password }}"
+
+- name: Etiquetar la imagen para ACR
+  containers.podman.podman_tag:
+    image: "docker.io/library/nginx:latest"
+    target_names: 
+      - "{{ acr_login_server }}/nginx:latest"
+
+- name: Subir imagen a ACR
+  containers.podman.podman_image:
+    name: "{{ acr_login_server }}/nginx"
+    tag: latest
+    push: true

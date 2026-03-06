@@ -1,0 +1,9 @@
+- name: SUbir imágenes a ACR
+  hosts: localhost
+  gather_facts: false
+  become: true
+
+  tasks:
+    - name: Incluir el rol de configuración de ACR
+      include_role:
+        name: acr_conf
