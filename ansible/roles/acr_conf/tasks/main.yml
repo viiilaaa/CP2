@@ -1,4 +1,3 @@
-#SPDX-License-Identifier: MIT-0
 ---
 # tasks file for acr_conf
 
@@ -9,10 +8,14 @@
     password: "{{ acr_admin_password }}"
 
 - name: Descargar imagen de nginx
-  include_tasks: Pullnginx.yml
+  ansible.builtin.include_tasks: Pullnginx.yml
 
+- name: Descargar imagen de redis
+  ansible.builtin.include_tasks: PullRedis.yml
+
+- name: Descargar imagen de Vote-Frontend
+  ansible.builtin.include_tasks: PullVoteFront.yml
 
 - name: Cerrar sesión de ACR
   containers.podman.podman_logout:
     registry: "{{ acr_login_server }}"
-    
