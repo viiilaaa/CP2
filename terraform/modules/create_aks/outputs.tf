@@ -2,7 +2,7 @@ output "aks_name" {
   value = azurerm_kubernetes_cluster.aks_cluster.name
 }
 
-output "kube_config_raw" {
-  value     = azurerm_kubernetes_cluster.aks_cluster.kube_config_raw
-  sensitive = true
+resource "local_file" "kubeconfig" {
+  content  = azurerm_kubernetes_cluster.aks_cluster.kube_config_raw
+  filename = "${path.module}/../../../ansible/kubeconfig_aks"  # Se creará en la misma carpeta donde ejecutes terraform
 }

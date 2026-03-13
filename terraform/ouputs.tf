@@ -39,8 +39,3 @@ output "acr_identity_id" {
 output "aks_name" {
   value = module.aks-create.aks_name
 }
-
-output "kube_config_raw" {
-  value     = module.aks-create.kube_config_raw
-  sensitive = true
-}

@@ -22,5 +22,8 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
 resource "azurerm_role_assignment" "aks_role_pull" {
   scope                =  var.acr_id
   role_definition_name = "AcrPull"
-  principal_id         = azurerm_kubernetes_cluster.aks_cluster.identity[0].principal_id
+  # principal_id         = azurerm_kubernetes_cluster.aks_cluster.identity[0].principal_id
+  principal_id         = azurerm_kubernetes_cluster.aks_cluster.kubelet_identity[0].object_id
+  
+  depends_on = [ azurerm_kubernetes_cluster.aks_cluster ]
 }
