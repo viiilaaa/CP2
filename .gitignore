@@ -1,6 +1,6 @@
 *.tfvars
-*.tfstate
-*.tfstate.backup
+*.tfstate*
 *.terraform*
 *.ansible
 *kubeconfig*
+*.ini

@@ -20,6 +20,8 @@
             labels:
               app: backend
           spec:
+            securityContext:
+              fsGroup: 1001
             containers:
               - name: redis
                 image: "{{ acr_login_server }}/redis:cp2"
@@ -38,7 +40,7 @@
                     memory: "128Mi"
                     cpu: "250m"
                 volumeMounts:
-                  - mountPath: /data
+                  - mountPath: /bitnami
                     name: redis-storage
             volumes:
               - name: redis-storage
