@@ -1,4 +1,4 @@
-- name: Descargar imagen de redis
+- name: Descargar imagen de votaciones
   containers.podman.podman_image:
     name: "docker.io/jsosa15/azure-vote-front"
     tag: v1

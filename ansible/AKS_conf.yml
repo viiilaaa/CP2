@@ -1,10 +1,9 @@
 - name: SUbir imágenes a ACR
   hosts: localhost
   gather_facts: false
-  become: true
   vars_files:
     - vars_nc.yml
   tasks:
     - name: Incluir el rol de configuración de ACR
       ansible.builtin.include_role:
-        name: acr_conf
+        name: AKS_conf

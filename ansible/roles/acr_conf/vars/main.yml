@@ -1,6 +1,2 @@
-#SPDX-License-Identifier: MIT-0
 ---
 # vars file for acr_conf
-acr_admin_password: Fz6uRtzUfUeYRhooQR5j08SQjyrrBWCIJHyJfAncDcsBwCipOi9bJQQJ99CCAC5T7U2Eqg7NAAACAZCRX3Hm
-acr_admin_username: cp2acrregistry
-acr_login_server: cp2acrregistry.azurecr.io
