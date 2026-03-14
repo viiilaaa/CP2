@@ -1,0 +1,17 @@
+- name: Descargar imagen {{ item.src_name }}:{{ item.src_tag }}
+  containers.podman.podman_image:
+    name: "{{ item.src_name }}"
+    tag: "{{ item.src_tag }}"
+    pull: true
+
+- name: Etiquetar la imagen para ACR
+  containers.podman.podman_tag:
+    image: "{{ item.src_name }}:{{ item.src_tag }}"
+    target_names:
+      - "{{ acr_login_server }}/{{ item.dest_name }}:{{ acr_default_tag }}"
+
+- name: Subir imagen a ACR
+  containers.podman.podman_image:
+    name: "{{ acr_login_server }}/{{ item.dest_name }}"
+    tag: "{{ acr_default_tag }}"
+    push: true

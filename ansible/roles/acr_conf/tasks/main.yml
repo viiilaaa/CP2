@@ -7,14 +7,11 @@
     username: "{{ acr_admin_username }}"
     password: "{{ acr_admin_password }}"
 
-- name: Descargar imagen de nginx
-  ansible.builtin.include_tasks: Pullnginx.yml
-
-- name: Descargar imagen de redis
-  ansible.builtin.include_tasks: PullRedis.yml
-
-- name: Descargar imagen de Vote-Frontend
-  ansible.builtin.include_tasks: PullVoteFront.yml
+- name: Descargar, etiquetar y subir imágenes a ACR
+  ansible.builtin.include_tasks: PullPushImage.yml
+  loop: "{{ images_to_process }}"
+  loop_control:
+    loop_var: item
 
 - name: Cerrar sesión de ACR
   containers.podman.podman_logout:

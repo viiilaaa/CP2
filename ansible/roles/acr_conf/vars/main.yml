@@ -1,2 +1,14 @@
 ---
-# vars file for acr_conf
+images_to_process:
+  - src_name: "docker.io/library/nginx"
+    src_tag: "latest"
+    dest_name: "nginx"
+  
+  - src_name: "docker.io/jsosa15/redis"
+    src_tag: "6.0.8" 
+    dest_name: "redis"
+    
+  - src_name: "docker.io/jsosa15/azure-vote-front" 
+    src_tag: "v1"
+    dest_name: "azure-vote-front"
+
