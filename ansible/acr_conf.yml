@@ -1,7 +1,0 @@
-- name: Subir imágenes a ACR
-  hosts: local
-  gather_facts: false
-  vars_files:
-    - secrets.yml
-  roles:
-    - acr_conf

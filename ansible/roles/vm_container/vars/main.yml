@@ -1,4 +1,4 @@
 ---
 # vars file for RunContainer
-nginx_user: "prueba"
-nginx_pass: "prueba123"
+nginx_user: "xxxxx"
+nginx_pass: "xxxxx"

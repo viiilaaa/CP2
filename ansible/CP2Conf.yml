@@ -1,3 +1,12 @@
+- name: Cifrar secretos generados por Terraform
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Cifrar secrets.yml
+      ansible.builtin.command:
+        cmd: "ansible-vault encrypt secrets.yml --vault-password-file ~/.vault_pass"
+      ignore_errors: true
+
 - name: Subir imágenes a ACR
   hosts: localhost
   gather_facts: false
