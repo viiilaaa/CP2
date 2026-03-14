@@ -1,3 +1,4 @@
-#SPDX-License-Identifier: MIT-0
 ---
 # defaults file for AKS_conf
+kubeconfig_path: ../../kubeconfig_aks
+app_tag: "cp2"

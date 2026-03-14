@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-deployment
+  name: "{{ backend.name }}-deployment"
   namespace: "{{ namespc }}"
   labels:
-    app: backend
+    app: "{{ backend.name }}"
 spec:
-  replicas: 1
+  replicas: {{ backend.replicas }}
   selector:
     matchLabels:
-      app: backend
+      app: "{{ backend.name }}"
   template:
     metadata:
       labels:
-        app: backend
+        app: "{{ backend.name }}"
     spec:
       securityContext:
         fsGroup: 1001
       containers:
-        - name: redis
-          image: "{{ acr_login_server }}/redis:cp2"
+        - name: "{{ backend.image }}"
+          image: "{{ acr_login_server }}/{{ backend.image }}:{{ app_tag }}"
           ports:
-            - containerPort: 6379
+            - containerPort: {{ backend.port }}
           env:
             - name: ALLOW_EMPTY_PASSWORD
               value: "yes"
@@ -29,29 +29,30 @@ spec:
               value: "yes"
           resources:
             limits:
-              memory: "256Mi"
-              cpu: "500m"
+              memory: "{{ backend.resources.limits.memory }}"
+              cpu: "{{ backend.resources.limits.cpu }}"
             requests:
-              memory: "128Mi"
-              cpu: "250m"
+              memory: "{{ backend.resources.requests.memory }}"
+              cpu: "{{ backend.resources.requests.cpu }}"
           volumeMounts:
             - mountPath: /bitnami
-              name: redis-storage
+              name: "{{ backend.name }}-storage"
       volumes:
-        - name: redis-storage
+        - name: "{{ backend.name }}-storage"
           persistentVolumeClaim:
             claimName: "{{ prefix }}-pvc"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend
+  name: "{{ backend.name }}"
   namespace: "{{ namespc }}"
   labels:
-    app: backend
+    app: "{{ backend.name }}"
 spec:
+  type: "{{ backend.service_type }}"
   ports:
-    - port: 6379
-      targetPort: 6379
+    - port: {{ backend.port }}
+      targetPort: {{ backend.port }}
   selector:
-    app: backend
+    app: "{{ backend.name }}"

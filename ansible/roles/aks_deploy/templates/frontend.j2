@@ -1,45 +1,45 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-deployment
+  name: "{{ frontend.name }}-deployment"
   namespace: "{{ namespc }}"
   labels:
-    app: frontend
+    app: "{{ frontend.name }}"
 spec:
-  replicas: 1
+  replicas: {{ frontend.replicas }}
   selector:
     matchLabels:
-      app: frontend
+      app: "{{ frontend.name }}"
   template:
     metadata:
       labels:
-        app: frontend
+        app: "{{ frontend.name }}"
     spec:
       containers:
-        - name: azure-vote-front
-          image: "{{ acr_login_server }}/azure-vote-front:cp2"
+        - name: "{{ frontend.name }}"
+          image: "{{ acr_login_server }}/{{ frontend.image }}:{{ app_tag }}"
           ports:
-            - containerPort: 80
+            - containerPort: {{ frontend.port }}
           env:
             - name: REDIS
-              value: "backend"
+              value: "{{ backend.name }}"
           resources:
             limits:
-              memory: "256Mi"
-              cpu: "500m"
+              memory: "{{ frontend.resources.limits.memory }}"
+              cpu: "{{ frontend.resources.limits.cpu }}"
             requests:
-              memory: "128Mi"
-              cpu: "250m"
+              memory: "{{ frontend.resources.requests.memory }}"
+              cpu: "{{ frontend.resources.requests.cpu }}"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend-service
+  name: "{{ frontend.name }}"
   namespace: "{{ namespc }}"
 spec:
-  type: LoadBalancer
+  type: "{{ frontend.service_type }}"
   ports:
-    - port: 80
-      targetPort: 80
+    - port: {{ frontend.port }}
+      targetPort: {{ frontend.port }}
   selector:
-    app: frontend
+    app: "{{ frontend.name }}"

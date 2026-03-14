@@ -2,4 +2,31 @@
 # vars file for AKS_conf
 namespc: cp2-app
 prefix: aks-cp2
-kubeconfig_path: ../../kubeconfig_aks
+
+backend:
+  name: "backend"
+  image: "redis"
+  replicas: 1
+  port: 6379
+  service_type: "ClusterIP"
+  resources:
+    limits:
+      cpu: "100m"
+      memory: "128Mi"
+    requests:
+      cpu: "50m"
+      memory: "64Mi"
+
+frontend:
+  name: "frontend"
+  image: "azure-vote-front"
+  replicas: 1
+  port: 80
+  service_type: "LoadBalancer"
+  resources:
+    limits:
+      cpu: "150m"
+      memory: "128Mi"
+    requests:
+      cpu: "50m"
+      memory: "64Mi"
