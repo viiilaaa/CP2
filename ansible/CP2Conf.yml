@@ -1,0 +1,24 @@
+- name: Subir imágenes a ACR
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - secrets.yml
+  roles:
+    - acr_conf
+
+- name: Configurar vm y arrancar contenedor
+  hosts: vm
+  gather_facts: false
+  become: true
+  vars_files:
+    - secrets.yml
+  roles:
+    - vm_container
+
+- name: Arrancar app en AKS
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - secrets.yml
+  roles:
+    - aks_deploy
