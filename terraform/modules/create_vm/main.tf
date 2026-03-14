@@ -1,6 +1,6 @@
 
 resource "azurerm_linux_virtual_machine" "vm" {
-    name                = "${var.PracticeName}-vm"
+    name                = "${var.prefix}-vm"
     resource_group_name = var.resource_group_name
     location            = var.resource_group_location
     size                = "Standard_B2s_v2"
@@ -15,7 +15,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
     }
 
     os_disk {
-        name                 = "${var.PracticeName}-osdisk"
+        name                 = "${var.prefix}-osdisk"
         caching              = "ReadWrite"
         storage_account_type = "Standard_LRS"
     }
@@ -26,7 +26,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
         sku       = "server"
         version   = "latest"
     }
-
+    
     tags = var.nametags
   
 }

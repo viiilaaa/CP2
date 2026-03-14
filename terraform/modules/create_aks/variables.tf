@@ -1,7 +1,7 @@
-variable "PracticeName" {
+variable "prefix" {
   description = "Nombre de la práctica"
   type        = string
-  default     = "CP2"
+  default     = "CP2-svila"
 }
 
 variable "resource_group_name" {

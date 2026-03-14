@@ -12,7 +12,6 @@ resource "azurerm_resource_group" "rg" {
 
 module "vm-create" {
   source = "./modules/create_vm"
-  PracticeName = "CP2"
   resource_group_name = azurerm_resource_group.rg.name
   resource_group_location = azurerm_resource_group.rg.location
   nametags = local.tags
@@ -20,7 +19,6 @@ module "vm-create" {
 
 module "acr-create" {
   source = "./modules/create_acr"
-  PracticeName = "CP2"
   resource_group_name = azurerm_resource_group.rg.name
   resource_group_location = azurerm_resource_group.rg.location
   nametags = local.tags
@@ -28,7 +26,6 @@ module "acr-create" {
 
 module "aks-create" {
   source = "./modules/create_aks"
-  PracticeName = "CP2"
   resource_group_name = azurerm_resource_group.rg.name
   resource_group_location = azurerm_resource_group.rg.location
   acr_id = module.acr-create.acr_id

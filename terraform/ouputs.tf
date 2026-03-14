@@ -4,18 +4,9 @@ output "public_ip" {
   value       = module.vm-create.public_ip
 }
 
-output "vm_id" {
-  description = "ID de la máquina virtual"
-  value       = module.vm-create.vm_id
-}
-
 output "vm_admin_username" {
   description = "User administrador para SSH"
   value       = module.vm-create.vm_admin_username
-}
-
-output "acr_id" {
-  value = module.acr-create.acr_id
 }
 
 output "acr_login_server" {
@@ -30,10 +21,6 @@ output "acr_admin_username" {
 output "acr_admin_password" {
   value     = module.acr-create.acr_admin_password
   sensitive = true 
-}
-
-output "acr_identity_id" {
-  value = module.acr-create.identity_id
 }
 
 output "aks_name" {

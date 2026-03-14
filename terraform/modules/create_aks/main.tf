@@ -1,8 +1,8 @@
 resource "azurerm_kubernetes_cluster" "aks_cluster" {
-  name                = "${var.PracticeName}-aks-cluster"
+  name                = "${var.prefix}-aks-cluster"
   location            = var.resource_group_location
   resource_group_name = var.resource_group_name
-  dns_prefix          = "${var.PracticeName}-aks"
+  dns_prefix          = "${var.prefix}-aks"
   sku_tier            = "Standard"
 
   default_node_pool {
@@ -22,7 +22,6 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
 resource "azurerm_role_assignment" "aks_role_pull" {
   scope                =  var.acr_id
   role_definition_name = "AcrPull"
-  # principal_id         = azurerm_kubernetes_cluster.aks_cluster.identity[0].principal_id
   principal_id         = azurerm_kubernetes_cluster.aks_cluster.kubelet_identity[0].object_id
   
   depends_on = [ azurerm_kubernetes_cluster.aks_cluster ]
