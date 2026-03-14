@@ -1,9 +1,3 @@
-- name: Iniciar sesión en ACR
-  containers.podman.podman_login:
-    registry: "{{ acr_login_server }}"
-    username: "{{ acr_admin_username }}"
-    password: "{{ acr_admin_password }}"
-
 - name: Descargar imagen de nginx
   containers.podman.podman_image:
     name: "{{ acr_login_server }}/nginx"

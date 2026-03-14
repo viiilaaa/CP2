@@ -1,7 +1,7 @@
 ---
 # tasks file for RunContainer
 - name: Setup de la máquina
-  ansible.builtin.include_tasks:: ProvisionVM.yml
+  ansible.builtin.include_tasks: ProvisionVM.yml
 
 - name: Iniciar sesión en ACR
   containers.podman.podman_login:
@@ -10,10 +10,10 @@
     password: "{{ acr_admin_password }}"
 
 - name: Configurar fichero Nginx y autenticación
-  ansible.builtin.include_tasks:: ConfNginx.yml
+  ansible.builtin.include_tasks: ConfNginx.yml
 
 - name: Configurar fichero Nginx y autenticación
-  ansible.builtin.include_tasks:: CreateContainer.yml
+  ansible.builtin.include_tasks: CreateContainer.yml
 
 - name: Cerrar sesión de ACR
   containers.podman.podman_logout:

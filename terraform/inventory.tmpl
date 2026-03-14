@@ -1,0 +1,8 @@
+[local]
+localhost ansible_connection=local ansible_python_interpreter=/home/sergio/.local/share/pipx/venvs/ansible/bin/python
+
+[vm]
+${vm_ip} ansible_ssh_private_key_file=/home/sergio/.ssh/mi_clave_azure ansible_user=${vm_admin_user}
+
+[all:vars]
+acr_name=${acr_name}
