@@ -1,5 +1,5 @@
 ---
 # vars file for AKS_conf
-namespc: cp2-namespace
+namespc: cp2-app
 prefix: aks-cp2
 kubeconfig_path: ../../kubeconfig_aks

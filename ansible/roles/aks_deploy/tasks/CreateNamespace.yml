@@ -1,8 +1,0 @@
-- name: Crear namespace
-  kubernetes.core.k8s:
-    kubeconfig: "{{ kubeconfig_path }}"
-    definition:
-      apiVersion: v1
-      kind: Namespace
-      metadata:
-        name: "{{ namespc }}"

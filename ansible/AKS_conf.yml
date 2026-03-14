@@ -2,8 +2,8 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - vars_nc.yml
+    - secrets.yml
   tasks:
     - name: Incluir el rol de configuración de ACR
       ansible.builtin.include_role:
-        name: AKS_conf
+        name: aks_deploy

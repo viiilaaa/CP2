@@ -1,14 +1,24 @@
 ---
-# tasks file for AKS_conf
-
 - name: Creación del namespace
-  ansible.builtin.include_tasks: CreateNamespace.yml
+  kubernetes.core.k8s:
+    kubeconfig: "{{ kubeconfig_path }}"
+    state: present
+    template: namespace.j2
 
 - name: Creación del PersistentVolumeClaim
-  ansible.builtin.include_tasks: CreatePVC.yml
+  kubernetes.core.k8s:
+    kubeconfig: "{{ kubeconfig_path }}"
+    state: present
+    template: pvc.j2
 
-- name: Creación del Redis
-  ansible.builtin.include_tasks: ConfRedis.yml
+- name: Desplegar Redis
+  kubernetes.core.k8s:
+    kubeconfig: "{{ kubeconfig_path }}"
+    state: present
+    template: backend.j2
 
-- name: Desplegar Frontend (Azure Vote)
-  ansible.builtin.include_tasks: ConfVote.yml
+- name: Desplegar Frontend
+  kubernetes.core.k8s:
+    kubeconfig: "{{ kubeconfig_path }}"
+    state: present
+    template: frontend.j2
