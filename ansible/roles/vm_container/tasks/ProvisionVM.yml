@@ -1,6 +1,6 @@
 - name: Actualizar la caché de repositorios (apt-get update)
   ansible.builtin.apt:
-    update_cache: yes
+    update_cache: true
 
 - name: Instalar podman
   ansible.builtin.package:

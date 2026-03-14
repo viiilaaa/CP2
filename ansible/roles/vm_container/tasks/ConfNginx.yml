@@ -12,29 +12,11 @@
 
 - name: Crear index.html
   ansible.builtin.copy:
+    src: "index.html"
     dest: "{{ path_data }}/index.html"
-    owner: azureuser
-    group: azureuser
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
     mode: '0644'
-    content: |
-      <!DOCTYPE html>
-      <html>
-      <head>
-          <meta charset="UTF-8">
-          <title>Caso Práctico 2</title>
-      </head>
-      <body>
-          <h1>¡Hola! Funciona correctamente.</h1>
-          <p>Si estás leyendo esto, significa que:</p>
-          <ul>
-              <li>La autenticación ha sido superada.</li>
-              <li>El volumen de datos se ha montado bien.</li>
-              <li>El servicio Nginx está activo.</li>
-          </ul>
-          <hr>
-          <p><i>Desplegado con Ansible.</i></p>
-      </body>
-      </html>
 
 - name: Generar archivo de autenticación (.htpasswd)
   community.general.htpasswd:
@@ -47,17 +29,5 @@
 
 - name: Crear configuración Nginx con Auth activada
   ansible.builtin.copy:
+    src: "default.conf"
     dest: "{{ path_data }}/default.conf"
-    content: |
-      server {
-          listen       80;
-          server_name  localhost;
-          
-          location / {
-              root   /usr/share/nginx/html;
-              index  index.html index.htm;  
-
-              auth_basic "Acceso Restringido";
-              auth_basic_user_file /etc/nginx/.htpasswd;    
-          }
-      }

@@ -1,6 +1,4 @@
-#SPDX-License-Identifier: MIT-0
 ---
 # vars file for RunContainer
-nginx_user: "xxxxx"
-nginx_pass: "xxxxx"
-path_data: "/home/azureuser/nginx-data"
+nginx_user: "prueba"
+nginx_pass: "prueba123"

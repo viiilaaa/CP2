@@ -3,7 +3,7 @@
     name: nginx
     image: "{{ acr_login_server }}/nginx:cp2"
     state: started
-    restart_policy: always  
+    restart_policy: always
     ports:
       - "80:80"
     volume:
