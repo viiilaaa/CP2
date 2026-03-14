@@ -13,6 +13,8 @@ resource "azurerm_subnet" "subnet" {
   virtual_network_name = azurerm_virtual_network.red-virtual.name
   address_prefixes     = ["10.0.1.0/24"]  
 
+  depends_on = [ azurerm_virtual_network.red-virtual ]
+
 }
 
 resource "azurerm_network_interface" "nic" {
@@ -28,6 +30,8 @@ resource "azurerm_network_interface" "nic" {
   }
 
   tags = var.nametags
+
+  depends_on = [ azurerm_subnet.subnet, azurerm_public_ip.public_ip ]
 } 
 
 resource "azurerm_public_ip" "public_ip" {

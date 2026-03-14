@@ -15,7 +15,3 @@ output "acr_admin_password" {
   value     = azurerm_container_registry.acr.admin_password
   sensitive = true 
 }
-
-output "identity_id" {
-  value = azurerm_user_assigned_identity.acr_identity.id
-}

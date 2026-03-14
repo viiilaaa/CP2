@@ -1,5 +1,5 @@
 resource "azurerm_container_registry" "acr" {
-  name                = "${var.prefix}_acregistry"
+  name                = lower(replace("${var.prefix}acregistry", "-", ""))
   location            = var.resource_group_location
   resource_group_name = var.resource_group_name
   sku                 = "Basic"

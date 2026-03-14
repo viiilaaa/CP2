@@ -23,3 +23,9 @@ variable "nametags" {
   description = "Etiquetas para los recursos"
   type        = map(string)
 }
+
+variable "vm_size" {
+  description = "Tamaño de la máquina virtual"
+  type        = string
+  default     = "Standard_B2s_v2"
+}
