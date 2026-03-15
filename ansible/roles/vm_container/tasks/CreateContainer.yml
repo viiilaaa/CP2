@@ -2,7 +2,7 @@
   containers.podman.podman_container:
     name: nginx
     image: "{{ acr_login_server }}/nginx:cp2"
-    state: started
+    state: created
     restart_policy: always
     ports:
       - "80:80"
@@ -10,3 +10,17 @@
       - "{{ path_data }}/index.html:/usr/share/nginx/html/index.html:ro"
       - "{{ path_data }}/default.conf:/etc/nginx/conf.d/default.conf:ro"
       - "{{ path_data }}/.htpasswd:/etc/nginx/.htpasswd:ro"
+
+- name: Generar unidad systemd
+  containers.podman.podman_generate_systemd:
+    name: nginx
+    new: true
+    no_header: true
+    dest: /etc/systemd/system
+
+- name: Asegurarse que el servicio está corriendo
+  ansible.builtin.systemd:
+    name: container-nginx
+    daemon_reload: true
+    state: started
+    enabled: true
