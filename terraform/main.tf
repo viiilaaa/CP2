@@ -5,7 +5,7 @@ locals {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "rg-terraform"
+  name     = "rg-cp2"
   location = var.ubicacion_recursos
   tags     = local.tags
 }
